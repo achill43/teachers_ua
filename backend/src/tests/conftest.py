@@ -68,7 +68,7 @@ async def user_fixture(test_app):
         CreateUserResponse,
         await pydiator.send(
             req=CreateUserRequest(
-                email="test+1@gmail.com",
+                email="email+1@gmail.com",
                 first_name="Test",
                 last_name="Test",
                 password="String1234",
