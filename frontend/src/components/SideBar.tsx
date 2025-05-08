@@ -9,7 +9,6 @@ const SideBar: React.FC = () => {
             <div className="menu">
                 <Link to="/" className={styles.menu_item}>Home</Link>
                 <Link to="/login" className={styles.menu_item}>Sign In</Link>
-                <Link to="/login" className={styles.menu_item}>Sign Up</Link>
                 <Link to="/about" className={styles.menu_item}>About Us</Link>
             </div>
         </div>
