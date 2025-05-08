@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check</title>
+</head>
+<body>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 10px auto;
+        }
+        .top-block {
+            border-bottom: 1px dashed #000;
+        }
+        .bottom-block {
+            border-top: 1px dashed #000;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .product-block {
+            border-top: 1px dashed #000;
+            border-bottom: 1px dashed #000;
+        }
+        .product-row {
+            width: 100%;
+            display: flex;
+            flex-wrap: no-wrap;
+            justify-content: space-between;
+        }
+        .product-item {
+            width: 50%;
+        }
+    </style>
+    <div class="container">
+        <div class="top-block text-center">
+            <h1>ФОП  
+                {% if user %}
+                    {{user.first_name}} {{user.last_name}}
+                {% endif %}
+            </h1>
+        </div>
+        {% for product in order.products %}
+            <div class="product-block">
+                <div class="product-row">{{product.price}} * {{product.quantity}}</div>
+                <div class="product-row">
+                    <div class="product-item">{{product.name}}</div>
+                    <div class="product-item text-right">{{product.total}}</div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="product-block">
+            <div class="product-row">
+                <div class="product-item">СУМА</div>
+                <div class="product-item text-right">{{order.total}}</div>
+            </div>
+            <div class="product-row">
+                <div class="product-item">
+                    {% if order.payment.type.value == "cash" %}
+                        Готівка
+                    {% else %}
+                        Картка
+                    {% endif %}
+                </div>
+                <div class="product-item text-right">{{order.total}}</div>
+            </div>
+            <div class="product-row">
+                <div class="product-item">Решта</div>
+                <div class="product-item text-right">{{order.rest}}</div>
+            </div>
+        </div>
+        <div class="bottom-block text-center">
+            <p>Дякуємо за покупку!</p>
+            <p>{{order.created_at}}</p>
+        </div>
+    </div>
+</body>
+</html>

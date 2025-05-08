@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.backend
+    restart: always
+    volumes:
+      - ./backend/src:/src
+    ports:
+      - 8000:8000
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - database
+    networks:
+      - tutor_ua
+
+
+  database:
+    image: postgres:13-alpine
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./var/postgres:/var/lib/postgresql/data/
+    networks:
+      - tutor_ua
+
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.frontend
+    restart: always
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - tutor_ua
+    depends_on:
+      - backend
+
+networks:
+  tutor_ua:

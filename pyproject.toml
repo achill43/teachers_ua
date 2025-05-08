@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "english-app"
+version = "0.1.0"
+description = ""
+authors = ["Sergei Sorochinskii <sergei.sorochinskii93@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.14"
+fastapi = "^0.115.5"
+uvicorn = "^0.32.0"
+pydiator-core = "^1.0.12"
+sqlalchemy = "^2.0.36"
+alembic = "^1.14.0"
+pydantic-settings = "^2.6.1"
+asyncpg = "^0.30.0"
+pyjwt = "^2.9.0"
+passlib = "^1.7.4"
+fastapi-injector = "^0.6.2"
+fastapi-contrib = "^0.2.11"
+jinja2 = "^3.1.4"
+pytest = "^8.3.3"
+pytest-env = "^1.1.5"
+pytest-asyncio = "^0.24.0"
+pytest-tornasync = "^0.6.0.post2"
+pytest-trio = "^0.8.0"
+pytest-twisted = "^1.14.3"
+twisted = "^24.10.0"
+pytest-mock = "^3.14.0"
+pytest-cov = "^6.0.0"
+pre-commit = "^4.0.1"
+pyright = "^1.1.389"
+aiosqlite = "^0.20.0"
+pydantic = {extras = ["email"], version = "^2.10.0"}
+bcrypt = "^4.3.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.10.0"
+isort = "^5.13.2"
+pre-commit = "^4.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

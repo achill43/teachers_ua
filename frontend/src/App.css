@@ -1,0 +1,23 @@
+.App {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  overflow-y: hidden;
+}
+
+.content {
+  padding: 25px 15px;
+  flex-grow: 1;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  color: #000000;
+}

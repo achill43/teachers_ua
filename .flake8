@@ -1,0 +1,4 @@
+[flake8]
+max-line-length = 120
+exclude = .venv, backend/src/alembic/versions/, backend/src/models/__init__.py
+ignore = E203, W503
