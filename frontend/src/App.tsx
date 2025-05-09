@@ -5,12 +5,13 @@ import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import NotFound from "./pages/NotFound";
 import Login from './pages/Login';
-import SideBar from "./components/SideBar";
-
+import Header from './components/Header';
 function App() {
   return (
     <div className="App">
-      <SideBar />
+      <div className="header">
+        <Header/>
+      </div>
       <div className="content">
       <Routes>
             <Route path="/" element={<Home />} />

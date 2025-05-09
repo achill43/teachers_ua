@@ -30,7 +30,6 @@ services:
       - tutor_ua
 
   frontend:
-    container_name: frontend
     build:
       context: .
       dockerfile: ./docker/Dockerfile.frontend
