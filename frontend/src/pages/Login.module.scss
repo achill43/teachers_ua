@@ -1,0 +1,51 @@
+.row {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.myForm {
+    width: 100%;
+    display: block;
+}
+.col30 {
+    width: 30%;
+    display: block;
+    box-sizing: border-box;
+}
+.col60 {
+    width: 70%;
+    display: block;
+    box-sizing: border-box;
+}
+.card {
+    max-width: 900px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 15px;
+}
+input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 15px;
+    width: 250px;
+}
+.successBlock {
+    border: 1px solid #44db5d;
+    border-radius: 5px;
+    background-color: #44db6a3b;
+    color: #017715;
+    padding: 5px 25px;
+    text-align: center;
+}
+.errorBlock {
+    border: 1px solid #db4444;
+    border-radius: 5px;
+    background-color: #db44443b;
+    color: #940101;
+    padding: 5px 25px;
+    text-align: center;
+}
