@@ -4,7 +4,7 @@ import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
     return (
-        <div className={styles.mainMenu} id="mainMenu">
+        <nav className={styles.mainMenu} id="mainMenu">
             {/* <button className={[styles.Hamburger, styles.cHamburgerLine].join(' ')} id="showMenu">
             <span></span>
             </button> */}
@@ -14,7 +14,7 @@ const Header: React.FC = () => {
                     <Link to="/" className={styles.menu_item}>Home</Link>
                 </li>
                 <li>
-                    <Link to="/login" className={styles.menu_item}>Sign In</Link>
+                    <Link to="/sign_in" className={styles.menu_item}>Sign In</Link>
                 </li>
                 <li>
                     <Link to="/about" className={styles.menu_item}>About Us</Link>
@@ -29,7 +29,7 @@ const Header: React.FC = () => {
                     </form>
                 </li>
             </ul>
-        </div>
+        </nav>
     );
 };
 

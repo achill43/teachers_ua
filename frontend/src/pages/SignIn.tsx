@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import styles from './Login.module.scss';
+import { Link } from "react-router-dom";
+import styles from './SignIn.module.scss';
 
 interface FormData {
   email: string;
@@ -7,7 +8,7 @@ interface FormData {
 }
 
 
-const Login: React.FC = () => {
+const SignIn: React.FC = () => {
     const [formData, setFormData] = useState({
       email: "",
       password: "",
@@ -53,8 +54,8 @@ const Login: React.FC = () => {
                   </div>
               </div>
               <div className={styles.row}>
-                  <button className="btn">Login</button>
-                  <button className="btn btn-dark">Registration</button>
+                  <button className="btn">Sign In</button>
+                  <Link to="/sign_up" className="btn btn-dark">Sign Up</Link>
               </div>
           </form>
         </div>
@@ -62,4 +63,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default SignIn;
