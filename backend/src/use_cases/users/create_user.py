@@ -7,7 +7,7 @@ from models.users import UserSQL
 from pydantic import BaseModel, EmailStr, model_validator
 from pydiator_core.interfaces import BaseHandler, BaseRequest, BaseResponse
 from repositories.user_repository import UserRepository
-from schemas.users import SessionReponce, UserResponse
+from schemas.users import SessionReponce, UserResponse, UserRole
 
 # from utils.email import send_email
 from utils.jwt_token import generate_token, generate_token_data
@@ -20,12 +20,20 @@ class CreateUserRequest(BaseModel, BaseRequest):
     last_name: str
     password: str
     r_password: str
+    role: UserRole = UserRole.STUDENT
 
     @model_validator(mode="before")
     @classmethod
     def verify_password_match(cls, values: dict) -> dict:
         if values.get("password") != values.get("r_password"):
             raise ValidationError("The passwords and r_password must be the same.")
+        return values
+
+    @model_validator(mode="before")
+    @classmethod
+    def validate_role(cls, values: dict) -> dict:
+        if values.get("role") == UserRole.ADMIN:
+            raise ValidationError("You cannot create an admin user.")
         return values
 
 
@@ -49,6 +57,7 @@ class CreateUserHandler(BaseHandler):
         coded_password = get_hashed_password(req.password)
         user_item["password"] = coded_password
         del user_item["r_password"]
+        user_item["role"] = req.role.value
         user = await self.user_repository.create_user(UserSQL(**user_item))
         jti = uuid4().hex
         token_data = generate_token_data(
