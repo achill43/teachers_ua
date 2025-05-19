@@ -3,16 +3,18 @@ from uuid import uuid4
 
 import pytest
 import pytest_asyncio
-from app.server import app
-from db import Base, get_db
 from fastapi import Depends, FastAPI
 from fastapi_injector import InjectorMiddleware, attach_injector, request_scope
 from fastapi_injector.request_scope import RequestScope, _request_id_ctx
 from injector import Injector
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+
+from app.server import app
+from db import Base, get_db
 from injector_setup import injector_setup
 from pydiator_core.mediatr import Mediatr
 from pydiator_setup import setup_pydiator
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from schemas.users import UserRole
 from use_cases.users.create_user import CreateUserRequest, CreateUserResponse
 
 DATABASE_URL = "sqlite+aiosqlite:///./test.db"
@@ -73,6 +75,7 @@ async def user_fixture(test_app):
                 last_name="Test",
                 password="String1234",
                 r_password="String1234",
+                role=UserRole.STUDENT,
             )
         ),
     )

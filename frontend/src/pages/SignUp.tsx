@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import styles from './Login.module.scss';
+import styles from './SignIn.module.scss';
+import api from "../api/axios";
 
 enum Role {
-    teacher = "Teacher",
-    student = "Student"
+    teacher = "teacher",
+    student = "student"
 }
 
 interface FormData {
@@ -13,6 +14,15 @@ interface FormData {
     password: string;
     r_password: string;
     role: Role;
+}
+
+interface User {
+    first_name: string;
+    last_name: string;
+    email: string;
+    password: string;
+    r_password: string;
+    role: string;
 }
 
 interface FormErrors {
@@ -51,7 +61,7 @@ const SignUp: React.FC = () => {
         [name]: value,
         }));
     };
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log("Form submitted:", formData);
         if (formData.password != formData.r_password) {
@@ -59,6 +69,24 @@ const SignUp: React.FC = () => {
                 ...prev,
                 ["password"]: "Password and Confirm must be the same!",
             }));
+        }
+        else {
+            const newUser: User = {
+                first_name: formData.first_name,
+                last_name: formData.last_name,
+                email: formData.email,
+                password: formData.password,
+                r_password: formData.r_password,
+                role: formData.role.value,
+            };
+            const response = await api.post("/users/sign_up/", newUser).then((response) => {
+                console.log("✅ User created:", response.data);
+            })
+            .catch((error) => {
+                if (error.response) {
+                console.error("❌ Server error:", error.response.data);
+                }
+            });
         }
     };
 

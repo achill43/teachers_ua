@@ -10,6 +10,7 @@ class UserSQL(Base):
     password: Mapped[str]
     first_name: Mapped[str]
     last_name: Mapped[str]
+    role: Mapped[str]
 
     def __repr__(self) -> str:
         return f"<User id={self.id} email={self.email}>"

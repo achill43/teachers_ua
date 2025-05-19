@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import styles from './SignIn.module.scss';
+import { setAuthData } from "../store/authSlice";
+import api from "../api/axios";
+
+
+
 
 interface FormData {
   email: string;
@@ -9,7 +15,8 @@ interface FormData {
 
 
 const SignIn: React.FC = () => {
-    const [formData, setFormData] = useState({
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
       email: "",
       password: "",
   });
@@ -22,9 +29,19 @@ const SignIn: React.FC = () => {
       [name]: value,
       }));
   };
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
+    const response = await api.post("/users/sign_in/", formData).then((response) => {
+        const { user, session } = response.data;
+        dispatch(setAuthData({ user, session }));
+        console.log("✅ You are SingIn:", response.data);
+    })
+    .catch((error) => {
+        if (error.response) {
+        console.error("❌ Server error:", error.response.data);
+        }
+    });
   };
 
 
